@@ -47,7 +47,8 @@ response = analyticsreporting.reports().batchGet(
             {
               "expression": "ga:pageviews"
             }
-          ]
+          ],
+          "maxGroupCount": 500
         }
       ],
       "hideTotals": True,
