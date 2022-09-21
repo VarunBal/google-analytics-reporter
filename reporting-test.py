@@ -17,8 +17,8 @@ response = analyticsreporting.reports().batchGet(
       "viewId":VIEW_ID,
       "dateRanges":[
         {
-          "startDate":"2017-01-08",
-          "endDate":"2022-06-30"
+          "startDate":"2017-01-01",
+          "endDate":"2022-09-20"
         }],
       "metrics":[
         {
@@ -27,7 +27,30 @@ response = analyticsreporting.reports().batchGet(
       "dimensions": [
         {
           "name":"ga:pagePath"
-        }]
+        },{
+          "name":"ga:yearWeek"
+        }],
+      "orderBys": [
+        {
+          "fieldName": "ga:yearWeek"
+        }
+      ],
+      "pivots": [
+        {
+          "dimensions": [
+            {
+              "name": "ga:yearWeek"
+            }
+          ],
+          "metrics": [
+            {
+              "expression": "ga:pageviews"
+            }
+          ]
+        }
+      ],
+      "hideTotals": True,
+      "pageSize": 100,
       }]
   }
 ).execute()
