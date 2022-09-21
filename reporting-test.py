@@ -1,6 +1,7 @@
 from apiclient.discovery import build
 from oauth2client.service_account import ServiceAccountCredentials
 from pprint import pprint
+import pickle
 
 SCOPES = ['https://www.googleapis.com/auth/analytics.readonly']
 KEY_FILE_LOCATION = 'credentials.json'
@@ -79,3 +80,6 @@ def printResults(response):
 
 # printResults(response)
 pprint(response)
+
+with open('response.pkl', 'wb') as fh:
+  pickle.dump(response, fh)
