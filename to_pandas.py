@@ -25,7 +25,7 @@ for pvt_header_entry in pvt_header_entries:
     # print(pvt_header_entry.get('dimensionValues'))
     dimension_values.append(pvt_header_entry.get('dimensionValues')[0])
 
-df = pd.DataFrame(columns=dimension_values)
+df = pd.DataFrame(columns=sorted(dimension_values))
 # df = pd.DataFrame(columns=[dimensions[0]]+dimension_values)
 # df.set_index(dimensions[0])
 # print(df)
