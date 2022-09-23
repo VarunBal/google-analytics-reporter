@@ -31,6 +31,19 @@ response = analyticsreporting.reports().batchGet(
         },{
           "name":"ga:yearWeek"
         }],
+      "dimensionFilterClauses": [
+        {
+          "filters": [
+            {
+              "dimensionName": "ga:pagePath",
+              "not": True,
+              "expressions": [
+                "^/\?(.*)"
+              ]
+            }
+          ]
+        }
+      ],
       "orderBys": [
         {
           "fieldName": "ga:yearWeek"
