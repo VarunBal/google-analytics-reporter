@@ -38,7 +38,7 @@ response = analyticsreporting.reports().batchGet(
               "dimensionName": "ga:pagePath",
               "not": True,
               "expressions": [
-                "^/\?(.*)"
+                "\?(.*)$"
               ]
             }
           ]
