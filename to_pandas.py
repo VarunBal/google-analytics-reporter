@@ -1,8 +1,9 @@
 import pickle
 import pandas as pd
 from pprint import pprint
+import os
 
-pickle_off = open("response.pkl", "rb")
+pickle_off = open("reports/response-100000-200000.pkl", "rb")
 response = pickle.load(pickle_off)
 
 # pprint(response)
@@ -30,13 +31,28 @@ df = pd.DataFrame(columns=sorted(dimension_values))
 # df.set_index(dimensions[0])
 # print(df)
 
-rows = data.get('rows')
 
-for row in rows:
-    dimension = row['dimensions']
-    value = row['metrics'][0]['values'][0]
-    df.loc[dimension[0], dimension[1]] = value
-    # print(dimension)
+root, folders, files = next(os.walk("reports"))
+# print(root, folders, files)
+
+for file in files:
+    pickle_off = open(os.path.join(root, file), "rb")
+    response = pickle.load(pickle_off)
+
+    report = response.get('reports')[0]
+
+    data = report.get('data')
+
+    rows = data.get('rows')
+
+    for row in rows:
+        dimension = row['dimensions']
+        value = row['metrics'][0]['values'][0]
+        df.loc[dimension[0], dimension[1]] = value
+        # print(dimension)
 
 # print(dimensions)
 print(df.head().to_string())
+
+print("saving to csv...")
+df.to_csv('final_consolidated_report.csv')
